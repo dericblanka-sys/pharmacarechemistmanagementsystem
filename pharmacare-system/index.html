@@ -1,0 +1,1688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PharmaCare - Chemist Management System</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/chart.min.js"></script>
+</head>
+<body>
+    <!-- Login Page -->
+    <div id="loginPage" class="login-container">
+        <div class="login-wrapper">
+            <div class="login-left">
+                <div class="login-branding">
+                    <div class="logo">
+                        <svg viewBox="0 0 48 48" width="64" height="64">
+                            <rect x="8" y="8" width="32" height="32" rx="8" fill="#0056b3"/>
+                            <circle cx="18" cy="20" r="4" fill="#4CAF50"/>
+                            <circle cx="30" cy="20" r="4" fill="#4CAF50"/>
+                            <circle cx="18" cy="30" r="4" fill="#4CAF50"/>
+                            <circle cx="30" cy="30" r="4" fill="#4CAF50"/>
+                        </svg>
+                    </div>
+                    <h1>PharmaCare</h1>
+                    <p>Advanced Chemist Management System</p>
+                    <div class="login-features">
+                        <div class="feature-item">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="2">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                <polyline points="22 4 12 14.01 9 11.01"/>
+                            </svg>
+                            <span>Inventory Management</span>
+                        </div>
+                        <div class="feature-item">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="2">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                <polyline points="22 4 12 14.01 9 11.01"/>
+                            </svg>
+                            <span>Point of Sale</span>
+                        </div>
+                        <div class="feature-item">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="2">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                <polyline points="22 4 12 14.01 9 11.01"/>
+                            </svg>
+                            <span>Customer & Prescription Tracking</span>
+                        </div>
+                        <div class="feature-item">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="2">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                <polyline points="22 4 12 14.01 9 11.01"/>
+                            </svg>
+                            <span>Advanced Analytics</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="login-right">
+                <div class="login-form-container">
+                    <h2>Welcome Back</h2>
+                    <p>Sign in to access your dashboard</p>
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label for="loginEmail">Email Address</label>
+                            <input type="email" id="loginEmail" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="loginPassword">Password</label>
+                            <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                        </div>
+                        <div class="form-options">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="rememberMe">
+                                <span>Remember me</span>
+                            </label>
+                            <a href="#" class="forgot-link">Forgot password?</a>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                    </form>
+                    <div class="demo-accounts">
+                        <p>Demo Accounts (any password):</p>
+                        <div class="demo-account-list">
+                            <button class="demo-btn" onclick="fillDemoLogin('admin@pharmacare.com', 'admin')">Admin</button>
+                            <button class="demo-btn" onclick="fillDemoLogin('pharmacist@pharmacare.com', 'pharmacist')">Pharmacist</button>
+                            <button class="demo-btn" onclick="fillDemoLogin('cashier@pharmacare.com', 'cashier')">Cashier</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Application -->
+    <div id="mainApp" class="app-container hidden">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-small">
+                    <svg viewBox="0 0 48 48" width="36" height="36">
+                        <rect x="8" y="8" width="32" height="32" rx="8" fill="#0056b3"/>
+                        <circle cx="18" cy="20" r="4" fill="#4CAF50"/>
+                        <circle cx="30" cy="20" r="4" fill="#4CAF50"/>
+                        <circle cx="18" cy="30" r="4" fill="#4CAF50"/>
+                        <circle cx="30" cy="30" r="4" fill="#4CAF50"/>
+                    </svg>
+                </div>
+                <span class="logo-text">PharmaCare</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-page="dashboard">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7"/>
+                        <rect x="14" y="3" width="7" height="7"/>
+                        <rect x="14" y="14" width="7" height="7"/>
+                        <rect x="3" y="14" width="7" height="7"/>
+                    </svg>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="nav-item" data-page="inventory">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                        <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                        <line x1="12" y1="22.08" x2="12" y2="12"/>
+                    </svg>
+                    <span>Inventory</span>
+                </a>
+                <a href="#" class="nav-item" data-page="pos">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="9" cy="21" r="1"/>
+                        <circle cx="20" cy="21" r="1"/>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                    </svg>
+                    <span>Point of Sale</span>
+                </a>
+                <a href="#" class="nav-item" data-page="customers">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                    <span>Customers</span>
+                </a>
+                <a href="#" class="nav-item" data-page="suppliers">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M1 3h15v13H1z"/>
+                        <path d="M16 8h4l3 3v5h-7V8z"/>
+                        <circle cx="5.5" cy="18.5" r="2.5"/>
+                        <circle cx="18.5" cy="18.5" r="2.5"/>
+                    </svg>
+                    <span>Suppliers</span>
+                </a>
+                <a href="#" class="nav-item" data-page="reports">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="20" x2="18" y2="10"/>
+                        <line x1="12" y1="20" x2="12" y2="4"/>
+                        <line x1="6" y1="20" x2="6" y2="14"/>
+                    </svg>
+                    <span>Reports</span>
+                </a>
+                <div class="nav-divider"></div>
+                <a href="#" class="nav-item admin-only" data-page="users">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 4.354a4 4 0 1 1 0 5.292M15 21H3v-1a6 6 0 0 1 12 0v1zm0 0h6v-1a6 6 0 0 0-9-5.197M13 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0z"/>
+                    </svg>
+                    <span>User Management</span>
+                </a>
+                <a href="#" class="nav-item" data-page="settings">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                    </svg>
+                    <span>Settings</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <button class="logout-btn" onclick="logout()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                        <polyline points="16 17 21 12 16 7"/>
+                        <line x1="21" y1="12" x2="9" y2="12"/>
+                    </svg>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="header-left">
+                    <button class="sidebar-toggle" onclick="toggleSidebar()">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="3" y1="12" x2="21" y2="12"/>
+                            <line x1="3" y1="6" x2="21" y2="6"/>
+                            <line x1="3" y1="18" x2="21" y2="18"/>
+                        </svg>
+                    </button>
+                    <div class="search-box">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"/>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                        </svg>
+                        <input type="text" placeholder="Search medicines, customers, invoices..." id="globalSearch">
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="header-alerts">
+                        <button class="alert-btn" onclick="showNotifications()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                                <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                            </svg>
+                            <span class="alert-badge" id="alertBadge">0</span>
+                        </button>
+                    </div>
+                    <div class="user-menu">
+                        <button class="user-btn" onclick="toggleUserMenu()">
+                            <div class="user-avatar" id="userAvatar">A</div>
+                            <span class="user-name" id="userName">Admin</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"/>
+                            </svg>
+                        </button>
+                        <div class="user-dropdown hidden" id="userDropdown">
+                            <div class="dropdown-header">
+                                <div class="user-avatar large" id="dropdownAvatar">A</div>
+                                <div class="user-info">
+                                    <span class="user-fullname" id="dropdownFullname">Admin User</span>
+                                    <span class="user-role" id="dropdownRole">Administrator</span>
+                                </div>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item" onclick="showPage('settings')">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="3"/>
+                                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                                </svg>
+                                Settings
+                            </a>
+                            <button class="dropdown-item logout" onclick="logout()">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                                    <polyline points="16 17 21 12 16 7"/>
+                                    <line x1="21" y1="12" x2="9" y2="12"/>
+                                </svg>
+                                Logout
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <div class="page-content">
+                <!-- Dashboard Page -->
+                <div id="dashboardPage" class="page active">
+                    <div class="page-header">
+                        <h1>Dashboard</h1>
+                        <p>Welcome back! Here's what's happening in your pharmacy today.</p>
+                    </div>
+                    
+                    <!-- KPI Cards -->
+                    <div class="kpi-grid">
+                        <div class="kpi-card">
+                            <div class="kpi-icon sales">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="12" y1="1" x2="12" y2="23"/>
+                                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                                </svg>
+                            </div>
+                            <div class="kpi-content">
+                                <span class="kpi-label">Today's Sales</span>
+                                <span class="kpi-value" id="todaySales">$0.00</span>
+                                <span class="kpi-change positive">+0% from yesterday</span>
+                            </div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-icon orders">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                                    <line x1="3" y1="6" x2="21" y2="6"/>
+                                    <path d="M16 10a4 4 0 0 1-8 0"/>
+                                </svg>
+                            </div>
+                            <div class="kpi-content">
+                                <span class="kpi-label">Transactions</span>
+                                <span class="kpi-value" id="todayTransactions">0</span>
+                                <span class="kpi-change positive">+0% from yesterday</span>
+                            </div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-icon inventory">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                                </svg>
+                            </div>
+                            <div class="kpi-content">
+                                <span class="kpi-label">Low Stock Items</span>
+                                <span class="kpi-value" id="lowStockCount">0</span>
+                                <span class="kpi-change negative">Requires attention</span>
+                            </div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-icon alerts">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="12" y1="8" x2="12" y2="12"/>
+                                    <line x1="12" y1="16" x2="12.01" y2="16"/>
+                                </svg>
+                            </div>
+                            <div class="kpi-content">
+                                <span class="kpi-label">Expiring Soon</span>
+                                <span class="kpi-value" id="expiringCount">0</span>
+                                <span class="kpi-change warning">Within 30 days</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Charts Row -->
+                    <div class="charts-row">
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <h3>Sales Overview</h3>
+                                <select id="salesChartPeriod" class="chart-filter" onchange="updateSalesChart()">
+                                    <option value="7">Last 7 Days</option>
+                                    <option value="30">Last 30 Days</option>
+                                    <option value="90">Last 90 Days</option>
+                                </select>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="salesChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <h3>Top Selling Medicines</h3>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="topProductsChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity & Alerts -->
+                    <div class="dashboard-bottom">
+                        <div class="activity-card">
+                            <div class="card-header">
+                                <h3>Recent Transactions</h3>
+                                <a href="#" onclick="showPage('reports')">View All</a>
+                            </div>
+                            <div class="activity-list" id="recentTransactions">
+                                <div class="empty-state">
+                                    <p>No recent transactions</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="alerts-card">
+                            <div class="card-header">
+                                <h3>Alerts & Notifications</h3>
+                                <button class="btn btn-sm btn-outline" onclick="markAllAlertsRead()">Mark all read</button>
+                            </div>
+                            <div class="alerts-list" id="alertsList">
+                                <div class="empty-state">
+                                    <p>No alerts at this time</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Inventory Page -->
+                <div id="inventoryPage" class="page">
+                    <div class="page-header">
+                        <div>
+                            <h1>Inventory Management</h1>
+                            <p>Manage your medicine catalog, stock levels, and track expirations.</p>
+                        </div>
+                        <button class="btn btn-primary admin-pharmacist" onclick="showAddMedicineModal()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19"/>
+                                <line x1="5" y1="12" x2="19" y2="12"/>
+                            </svg>
+                            Add Medicine
+                        </button>
+                    </div>
+
+                    <!-- Inventory Stats -->
+                    <div class="inventory-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">Total Medicines</span>
+                            <span class="stat-value" id="totalMedicines">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Total Stock Value</span>
+                            <span class="stat-value" id="totalStockValue">$0.00</span>
+                        </div>
+                        <div class="stat-item warning">
+                            <span class="stat-label">Low Stock</span>
+                            <span class="stat-value" id="lowStockStat">0</span>
+                        </div>
+                        <div class="stat-item danger">
+                            <span class="stat-label">Expiring Soon</span>
+                            <span class="stat-value" id="expiringStat">0</span>
+                        </div>
+                    </div>
+
+                    <!-- Filters -->
+                    <div class="filters-bar">
+                        <div class="search-filter">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="11" cy="11" r="8"/>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                            </svg>
+                            <input type="text" placeholder="Search medicines..." id="inventorySearch" oninput="filterInventory()">
+                        </div>
+                        <div class="filter-group">
+                            <select id="categoryFilter" onchange="filterInventory()">
+                                <option value="">All Categories</option>
+                                <option value="Antibiotics">Antibiotics</option>
+                                <option value="Pain Relief">Pain Relief</option>
+                                <option value="Vitamins">Vitamins</option>
+                                <option value="Cardiology">Cardiology</option>
+                                <option value="Dermatology">Dermatology</option>
+                                <option value="Respiratory">Respiratory</option>
+                                <option value="Gastrointestinal">Gastrointestinal</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <select id="stockFilter" onchange="filterInventory()">
+                                <option value="">All Stock Levels</option>
+                                <option value="low">Low Stock</option>
+                                <option value="out">Out of Stock</option>
+                                <option value="ok">In Stock</option>
+                            </select>
+                            <select id="expiryFilter" onchange="filterInventory()">
+                                <option value="">All Expiry Status</option>
+                                <option value="warning">Expiring Soon</option>
+                                <option value="expired">Expired</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-outline" onclick="exportInventory()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                <polyline points="7 10 12 15 17 10"/>
+                                <line x1="12" y1="15" x2="12" y2="3"/>
+                            </svg>
+                            Export
+                        </button>
+                    </div>
+
+                    <!-- Inventory Table -->
+                    <div class="data-table-container">
+                        <table class="data-table" id="inventoryTable">
+                            <thead>
+                                <tr>
+                                    <th onclick="sortInventory('sku')">SKU</th>
+                                    <th onclick="sortInventory('name')">Medicine Name</th>
+                                    <th onclick="sortInventory('category')">Category</th>
+                                    <th onclick="sortInventory('dosage')">Dosage</th>
+                                    <th onclick="sortInventory('price')">Price</th>
+                                    <th onclick="sortInventory('quantity')">Stock</th>
+                                    <th onclick="sortInventory('expiry')">Expiry Date</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="inventoryTableBody">
+                                <!-- Dynamic content -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination" id="inventoryPagination">
+                        <!-- Dynamic pagination -->
+                    </div>
+                </div>
+
+                <!-- POS Page -->
+                <div id="posPage" class="page">
+                    <div class="pos-container">
+                        <div class="pos-products">
+                            <div class="pos-header">
+                                <h2>Products</h2>
+                                <div class="pos-search">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="11" cy="11" r="8"/>
+                                        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                                    </svg>
+                                    <input type="text" placeholder="Search or scan barcode..." id="posSearch" oninput="searchPOSProducts()">
+                                </div>
+                            </div>
+                            <div class="pos-categories">
+                                <button class="category-btn active" onclick="filterPOSCategory('all')">All</button>
+                                <button class="category-btn" onclick="filterPOSCategory('Antibiotics')">Antibiotics</button>
+                                <button class="category-btn" onclick="filterPOSCategory('Pain Relief')">Pain Relief</button>
+                                <button class="category-btn" onclick="filterPOSCategory('Vitamins')">Vitamins</button>
+                                <button class="category-btn" onclick="filterPOSCategory('Cardiology')">Cardiology</button>
+                            </div>
+                            <div class="pos-products-grid" id="posProductsGrid">
+                                <!-- Dynamic products -->
+                            </div>
+                        </div>
+                        
+                        <div class="pos-cart">
+                            <div class="cart-header">
+                                <h2>Current Sale</h2>
+                                <button class="btn btn-sm btn-outline" onclick="clearCart()">Clear</button>
+                            </div>
+                            
+                            <div class="cart-customer">
+                                <div class="customer-select">
+                                    <label>Customer (Optional)</label>
+                                    <select id="cartCustomer" onchange="updateCartCustomer()">
+                                        <option value="">Walk-in Customer</option>
+                                    </select>
+                                </div>
+                                <div class="prescription-info admin-pharmacist">
+                                    <label>Prescription Required</label>
+                                    <label class="switch">
+                                        <input type="checkbox" id="prescriptionRequired" onchange="togglePrescriptionUpload()">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="cart-items" id="cartItems">
+                                <div class="empty-cart">
+                                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                                        <circle cx="9" cy="21" r="1"/>
+                                        <circle cx="20" cy="21" r="1"/>
+                                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                                    </svg>
+                                    <p>No items in cart</p>
+                                    <span>Search and add products to get started</span>
+                                </div>
+                            </div>
+                            
+                            <div class="cart-summary" id="cartSummary">
+                                <div class="summary-row">
+                                    <span>Subtotal</span>
+                                    <span id="cartSubtotal">$0.00</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span>Tax (10%)</span>
+                                    <span id="cartTax">$0.00</span>
+                                </div>
+                                <div class="summary-row discount-row">
+                                    <span>Discount</span>
+                                    <div class="discount-input">
+                                        <input type="number" id="cartDiscount" min="0" max="100" value="0" onchange="updateCartTotals()">
+                                        <span>%</span>
+                                    </div>
+                                </div>
+                                <div class="summary-row total-row">
+                                    <span>Total</span>
+                                    <span id="cartTotal">$0.00</span>
+                                </div>
+                            </div>
+                            
+                            <div class="cart-actions">
+                                <button class="btn btn-outline" onclick="holdCart()">Hold</button>
+                                <button class="btn btn-primary btn-block" onclick="processPayment()" id="checkoutBtn" disabled>
+                                    Checkout
+                                </button>
+                            </div>
+                            
+                            <!-- Payment Methods -->
+                            <div class="payment-methods" id="paymentMethods">
+                                <h4>Payment Method</h4>
+                                <div class="payment-options">
+                                    <label class="payment-option">
+                                        <input type="radio" name="paymentMethod" value="cash" checked>
+                                        <span class="payment-icon">💵</span>
+                                        <span>Cash</span>
+                                    </label>
+                                    <label class="payment-option">
+                                        <input type="radio" name="paymentMethod" value="card">
+                                        <span class="payment-icon">💳</span>
+                                        <span>Card</span>
+                                    </label>
+                                    <label class="payment-option">
+                                        <input type="radio" name="paymentMethod" value="insurance">
+                                        <span class="payment-icon">🏥</span>
+                                        <span>Insurance</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Customers Page -->
+                <div id="customersPage" class="page">
+                    <div class="page-header">
+                        <div>
+                            <h1>Customer Management</h1>
+                            <p>Manage customer profiles, track purchases, and maintain prescription records.</p>
+                        </div>
+                        <button class="btn btn-primary" onclick="showAddCustomerModal()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19"/>
+                                <line x1="5" y1="12" x2="19" y2="12"/>
+                            </svg>
+                            Add Customer
+                        </button>
+                    </div>
+
+                    <!-- Customer Stats -->
+                    <div class="customer-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">Total Customers</span>
+                            <span class="stat-value" id="totalCustomers">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Active This Month</span>
+                            <span class="stat-value" id="activeCustomers">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Pending Prescriptions</span>
+                            <span class="stat-value" id="pendingPrescriptions">0</span>
+                        </div>
+                    </div>
+
+                    <!-- Customer Search -->
+                    <div class="filters-bar">
+                        <div class="search-filter">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="11" cy="11" r="8"/>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                            </svg>
+                            <input type="text" placeholder="Search customers by name, phone, or email..." id="customerSearch" oninput="filterCustomers()">
+                        </div>
+                    </div>
+
+                    <!-- Customers Table -->
+                    <div class="data-table-container">
+                        <table class="data-table" id="customersTable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Phone</th>
+                                    <th>Email</th>
+                                    <th>Total Visits</th>
+                                    <th>Last Visit</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="customersTableBody">
+                                <!-- Dynamic content -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Suppliers Page -->
+                <div id="suppliersPage" class="page">
+                    <div class="page-header">
+                        <div>
+                            <h1>Supplier Management</h1>
+                            <p>Manage your suppliers and track purchase orders.</p>
+                        </div>
+                        <button class="btn btn-primary admin-pharmacist" onclick="showAddSupplierModal()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19"/>
+                                <line x1="5" y1="12" x2="19" y2="12"/>
+                            </svg>
+                            Add Supplier
+                        </button>
+                    </div>
+
+                    <div class="data-table-container">
+                        <table class="data-table" id="suppliersTable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Company Name</th>
+                                    <th>Contact Person</th>
+                                    <th>Phone</th>
+                                    <th>Email</th>
+                                    <th>Products</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="suppliersTableBody">
+                                <!-- Dynamic content -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Reports Page -->
+                <div id="reportsPage" class="page">
+                    <div class="page-header">
+                        <div>
+                            <h1>Reports & Analytics</h1>
+                            <p>View detailed reports and analytics for your pharmacy.</p>
+                        </div>
+                        <button class="btn btn-outline" onclick="exportReport()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                <polyline points="7 10 12 15 17 10"/>
+                                <line x1="12" y1="15" x2="12" y2="3"/>
+                            </svg>
+                            Export Report
+                        </button>
+                    </div>
+
+                    <!-- Report Filters -->
+                    <div class="report-filters">
+                        <div class="filter-group">
+                            <label>Report Type</label>
+                            <select id="reportType" onchange="updateReportView()">
+                                <option value="sales">Sales Report</option>
+                                <option value="inventory">Inventory Report</option>
+                                <option value="customers">Customer Analytics</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Date Range</label>
+                            <div class="date-range">
+                                <input type="date" id="reportStartDate">
+                                <span>to</span>
+                                <input type="date" id="reportEndDate">
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" onclick="generateReport()">Generate Report</button>
+                    </div>
+
+                    <!-- Sales Report -->
+                    <div id="salesReportView" class="report-view active">
+                        <div class="report-summary">
+                            <div class="summary-card">
+                                <h4>Total Revenue</h4>
+                                <span class="summary-value" id="reportTotalRevenue">$0.00</span>
+                            </div>
+                            <div class="summary-card">
+                                <h4>Total Transactions</h4>
+                                <span class="summary-value" id="reportTotalTransactions">0</span>
+                            </div>
+                            <div class="summary-card">
+                                <h4>Average Sale</h4>
+                                <span class="summary-value" id="reportAverageSale">$0.00</span>
+                            </div>
+                            <div class="summary-card">
+                                <h4>Items Sold</h4>
+                                <span class="summary-value" id="reportItemsSold">0</span>
+                            </div>
+                        </div>
+                        <div class="chart-card full-width">
+                            <div class="chart-header">
+                                <h3>Revenue Over Time</h3>
+                            </div>
+                            <div class="chart-container large">
+                                <canvas id="revenueChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="chart-card full-width">
+                            <div class="chart-header">
+                                <h3>Transaction Summary</h3>
+                            </div>
+                            <div class="chart-container large">
+                                <canvas id="transactionsChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Inventory Report -->
+                    <div id="inventoryReportView" class="report-view">
+                        <div class="report-summary">
+                            <div class="summary-card">
+                                <h4>Total Stock Value</h4>
+                                <span class="summary-value" id="reportStockValue">$0.00</span>
+                            </div>
+                            <div class="summary-card">
+                                <h4>Total Items</h4>
+                                <span class="summary-value" id="reportTotalItems">0</span>
+                            </div>
+                            <div class="summary-card warning">
+                                <h4>Low Stock Items</h4>
+                                <span class="summary-value" id="reportLowStock">0</span>
+                            </div>
+                            <div class="summary-card danger">
+                                <h4>Expiring Soon</h4>
+                                <span class="summary-value" id="reportExpiring">0</span>
+                            </div>
+                        </div>
+                        <div class="chart-card full-width">
+                            <div class="chart-header">
+                                <h3>Stock by Category</h3>
+                            </div>
+                            <div class="chart-container medium">
+                                <canvas id="categoryStockChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="chart-card full-width">
+                            <div class="chart-header">
+                                <h3>Stock Movement</h3>
+                            </div>
+                            <div class="chart-container large">
+                                <canvas id="stockMovementChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Customer Report -->
+                    <div id="customerReportView" class="report-view">
+                        <div class="report-summary">
+                            <div class="summary-card">
+                                <h4>Total Customers</h4>
+                                <span class="summary-value" id="reportTotalCustomers">0</span>
+                            </div>
+                            <div class="summary-card">
+                                <h4>New Customers</h4>
+                                <span class="summary-value" id="reportNewCustomers">0</span>
+                            </div>
+                            <div class="summary-card">
+                                <h4>Repeat Customers</h4>
+                                <span class="summary-value" id="reportRepeatCustomers">0</span>
+                            </div>
+                            <div class="summary-card">
+                                <h4>Avg. Customer Value</h4>
+                                <span class="summary-value" id="reportAvgCustomerValue">$0.00</span>
+                            </div>
+                        </div>
+                        <div class="chart-card full-width">
+                            <div class="chart-header">
+                                <h3>Customer Growth</h3>
+                            </div>
+                            <div class="chart-container large">
+                                <canvas id="customerGrowthChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="chart-card full-width">
+                            <div class="chart-header">
+                                <h3>Top Customers</h3>
+                            </div>
+                            <div class="chart-container medium">
+                                <canvas id="topCustomersChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Users Page -->
+                <div id="usersPage" class="page admin-only">
+                    <div class="page-header">
+                        <div>
+                            <h1>User Management</h1>
+                            <p>Manage system users and their access permissions.</p>
+                        </div>
+                        <button class="btn btn-primary" onclick="showAddUserModal()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19"/>
+                                <line x1="5" y1="12" x2="19" y2="12"/>
+                            </svg>
+                            Add User
+                        </button>
+                    </div>
+
+                    <div class="data-table-container">
+                        <table class="data-table" id="usersTable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Status</th>
+                                    <th>Last Login</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="usersTableBody">
+                                <!-- Dynamic content -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Settings Page -->
+                <div id="settingsPage" class="page">
+                    <div class="page-header">
+                        <h1>Settings</h1>
+                        <p>Manage your account and system preferences.</p>
+                    </div>
+
+                    <div class="settings-container">
+                        <div class="settings-section">
+                            <h3>Profile Information</h3>
+                            <form id="profileForm" onsubmit="updateProfile(event)">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Full Name</label>
+                                        <input type="text" id="profileName" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        <input type="email" id="profileEmail" required>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Phone</label>
+                                        <input type="tel" id="profilePhone">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Role</label>
+                                        <input type="text" id="profileRole" readonly>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                            </form>
+                        </div>
+
+                        <div class="settings-section">
+                            <h3>Change Password</h3>
+                            <form id="passwordForm" onsubmit="changePassword(event)">
+                                <div class="form-group">
+                                    <label>Current Password</label>
+                                    <input type="password" id="currentPassword" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>New Password</label>
+                                    <input type="password" id="newPassword" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Confirm New Password</label>
+                                    <input type="password" id="confirmPassword" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Update Password</button>
+                            </form>
+                        </div>
+
+                        <div class="settings-section">
+                            <h3>System Preferences</h3>
+                            <div class="preference-item">
+                                <div class="preference-info">
+                                    <h4>Low Stock Threshold</h4>
+                                    <p>Minimum stock level that triggers low stock alerts</p>
+                                </div>
+                                <input type="number" id="lowStockThreshold" value="10" min="1" onchange="updateSystemSetting('lowStockThreshold', this.value)">
+                            </div>
+                            <div class="preference-item">
+                                <div class="preference-info">
+                                    <h4>Expiry Warning Days</h4>
+                                    <p>Days before expiry to show warning alerts</p>
+                                </div>
+                                <input type="number" id="expiryWarningDays" value="30" min="1" onchange="updateSystemSetting('expiryWarningDays', this.value)">
+                            </div>
+                            <div class="preference-item">
+                                <div class="preference-info">
+                                    <h4>Tax Rate (%)</h4>
+                                    <p>Default tax rate applied to sales</p>
+                                </div>
+                                <input type="number" id="taxRate" value="10" min="0" max="100" onchange="updateSystemSetting('taxRate', this.value)">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <!-- Add/Edit Medicine Modal -->
+    <div class="modal" id="medicineModal">
+        <div class="modal-overlay" onclick="closeModal('medicineModal')"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="medicineModalTitle">Add New Medicine</h3>
+                <button class="modal-close" onclick="closeModal('medicineModal')">&times;</button>
+            </div>
+            <form id="medicineForm" onsubmit="saveMedicine(event)">
+                <input type="hidden" id="medicineId">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>SKU/Barcode</label>
+                        <input type="text" id="medicineSku" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Medicine Name</label>
+                        <input type="text" id="medicineName" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Generic Name</label>
+                        <input type="text" id="medicineGeneric">
+                    </div>
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select id="medicineCategory" required>
+                            <option value="">Select Category</option>
+                            <option value="Antibiotics">Antibiotics</option>
+                            <option value="Pain Relief">Pain Relief</option>
+                            <option value="Vitamins">Vitamins</option>
+                            <option value="Cardiology">Cardiology</option>
+                            <option value="Dermatology">Dermatology</option>
+                            <option value="Respiratory">Respiratory</option>
+                            <option value="Gastrointestinal">Gastrointestinal</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Dosage</label>
+                        <input type="text" id="medicineDosage" placeholder="e.g., 500mg">
+                    </div>
+                    <div class="form-group">
+                        <label>Form</label>
+                        <select id="medicineForm">
+                            <option value="Tablet">Tablet</option>
+                            <option value="Capsule">Capsule</option>
+                            <option value="Syrup">Syrup</option>
+                            <option value="Injection">Injection</option>
+                            <option value="Cream">Cream</option>
+                            <option value="Ointment">Ointment</option>
+                            <option value="Drops">Drops</option>
+                            <option value="Inhaler">Inhaler</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Price ($)</label>
+                        <input type="number" id="medicinePrice" step="0.01" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Cost Price ($)</label>
+                        <input type="number" id="medicineCost" step="0.01" min="0">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Quantity</label>
+                        <input type="number" id="medicineQuantity" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Reorder Level</label>
+                        <input type="number" id="medicineReorder" min="0" value="10">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Expiry Date</label>
+                        <input type="date" id="medicineExpiry" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Supplier</label>
+                        <select id="medicineSupplier">
+                            <option value="">Select Supplier</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="medicineDescription" rows="3"></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-outline" onclick="closeModal('medicineModal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Medicine</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add/Edit Customer Modal -->
+    <div class="modal" id="customerModal">
+        <div class="modal-overlay" onclick="closeModal('customerModal')"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="customerModalTitle">Add New Customer</h3>
+                <button class="modal-close" onclick="closeModal('customerModal')">&times;</button>
+            </div>
+            <form id="customerForm" onsubmit="saveCustomer(event)">
+                <input type="hidden" id="customerId">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="customerName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone</label>
+                        <input type="tel" id="customerPhone" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="customerEmail">
+                    </div>
+                    <div class="form-group">
+                        <label>Date of Birth</label>
+                        <input type="date" id="customerDob">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Address</label>
+                        <textarea id="customerAddress" rows="2"></textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Allergies</label>
+                        <textarea id="customerAllergies" rows="2" placeholder="List any known allergies"></textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Insurance Provider</label>
+                        <input type="text" id="customerInsurance">
+                    </div>
+                    <div class="form-group">
+                        <label>Insurance Number</label>
+                        <input type="text" id="customerInsuranceNumber">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Notes</label>
+                    <textarea id="customerNotes" rows="2" placeholder="Additional notes"></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-outline" onclick="closeModal('customerModal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Customer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add/Edit Supplier Modal -->
+    <div class="modal" id="supplierModal">
+        <div class="modal-overlay" onclick="closeModal('supplierModal')"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="supplierModalTitle">Add New Supplier</h3>
+                <button class="modal-close" onclick="closeModal('supplierModal')">&times;</button>
+            </div>
+            <form id="supplierForm" onsubmit="saveSupplier(event)">
+                <input type="hidden" id="supplierId">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Company Name</label>
+                        <input type="text" id="supplierCompany" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Contact Person</label>
+                        <input type="text" id="supplierContact" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Phone</label>
+                        <input type="tel" id="supplierPhone" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="supplierEmail" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Address</label>
+                    <textarea id="supplierAddress" rows="2"></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Payment Terms</label>
+                        <select id="supplierPaymentTerms">
+                            <option value="Net 30">Net 30</option>
+                            <option value="Net 60">Net 60</option>
+                            <option value="Net 90">Net 90</option>
+                            <option value="Due on Receipt">Due on Receipt</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select id="supplierStatus">
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Notes</label>
+                    <textarea id="supplierNotes" rows="2"></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-outline" onclick="closeModal('supplierModal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Supplier</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add/Edit User Modal -->
+    <div class="modal" id="userModal">
+        <div class="modal-overlay" onclick="closeModal('userModal')"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="userModalTitle">Add New User</h3>
+                <button class="modal-close" onclick="closeModal('userModal')">&times;</button>
+            </div>
+            <form id="userForm" onsubmit="saveUser(event)">
+                <input type="hidden" id="userId">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="userFullName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="userEmail" required>
+                    </div>
+                </div>
+                <div class="form-row" id="passwordRow">
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="userPassword">
+                    </div>
+                    <div class="form-group">
+                        <label>Confirm Password</label>
+                        <input type="password" id="userPasswordConfirm">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Role</label>
+                        <select id="userRole" required>
+                            <option value="admin">Administrator</option>
+                            <option value="pharmacist">Pharmacist</option>
+                            <option value="cashier">Cashier</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select id="userStatus">
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-outline" onclick="closeModal('userModal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save User</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Invoice Modal -->
+    <div class="modal" id="invoiceModal">
+        <div class="modal-overlay" onclick="closeModal('invoiceModal')"></div>
+        <div class="modal-content invoice-content">
+            <div class="modal-header">
+                <h3>Invoice</h3>
+                <button class="modal-close" onclick="closeModal('invoiceModal')">&times;</button>
+            </div>
+            <div class="invoice" id="invoiceContent">
+                <div class="invoice-header">
+                    <div class="invoice-logo">
+                        <svg viewBox="0 0 48 48" width="48" height="48">
+                            <rect x="8" y="8" width="32" height="32" rx="8" fill="#0056b3"/>
+                            <circle cx="18" cy="20" r="4" fill="#4CAF50"/>
+                            <circle cx="30" cy="20" r="4" fill="#4CAF50"/>
+                            <circle cx="18" cy="30" r="4" fill="#4CAF50"/>
+                            <circle cx="30" cy="30" r="4" fill="#4CAF50"/>
+                        </svg>
+                    </div>
+                    <div class="invoice-title">
+                        <h2>PharmaCare</h2>
+                        <p>Pharmacy & Chemist</p>
+                    </div>
+                </div>
+                <div class="invoice-details">
+                    <div class="invoice-info">
+                        <p><strong>Invoice #:</strong> <span id="invoiceNumber">INV-0000</span></p>
+                        <p><strong>Date:</strong> <span id="invoiceDate"></span></p>
+                        <p><strong>Time:</strong> <span id="invoiceTime"></span></p>
+                    </div>
+                    <div class="invoice-customer">
+                        <p><strong>Customer:</strong> <span id="invoiceCustomer">Walk-in</span></p>
+                        <p><strong>Cashier:</strong> <span id="invoiceCashier"></span></p>
+                    </div>
+                </div>
+                <table class="invoice-items">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Qty</th>
+                            <th>Price</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="invoiceItemsBody">
+                    </tbody>
+                </table>
+                <div class="invoice-totals">
+                    <div class="invoice-row">
+                        <span>Subtotal:</span>
+                        <span id="invoiceSubtotal">$0.00</span>
+                    </div>
+                    <div class="invoice-row">
+                        <span>Tax:</span>
+                        <span id="invoiceTax">$0.00</span>
+                    </div>
+                    <div class="invoice-row discount" id="invoiceDiscountRow">
+                        <span>Discount:</span>
+                        <span id="invoiceDiscount">$0.00</span>
+                    </div>
+                    <div class="invoice-row total">
+                        <span>Total:</span>
+                        <span id="invoiceTotal">$0.00</span>
+                    </div>
+                </div>
+                <div class="invoice-footer">
+                    <p><strong>Pharmacare Chemist</strong></p>
+                    <p>378 Embu</p>
+                    <p>Phone: 0797064861 | Email: admin@pharmacare.com</p>
+                    <p>Thank you for shopping with PharmaCare!</p>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-outline" onclick="printInvoice()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 6 2 18 2 18 9"/>
+                        <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+                        <rect x="6" y="14" width="12" height="8"/>
+                    </svg>
+                    Print
+                </button>
+                <button class="btn btn-primary" onclick="closeModal('invoiceModal')">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notifications Panel -->
+    <div class="notifications-panel" id="notificationsPanel">
+        <div class="notifications-header">
+            <h3>Notifications</h3>
+            <button onclick="hideNotifications()">&times;</button>
+        </div>
+        <div class="notifications-list" id="notificationsList">
+            <!-- Dynamic content -->
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Payment Method Selection Modal -->
+    <div class="modal" id="paymentMethodModal">
+        <div class="modal-overlay" onclick="closeModal('paymentMethodModal')"></div>
+        <div class="modal-content payment-modal">
+            <div class="modal-header">
+                <h3>Select Payment Method</h3>
+                <button class="modal-close" onclick="closeModal('paymentMethodModal')">&times;</button>
+            </div>
+            <div class="payment-options-container">
+                <div class="payment-total-display">
+                    <span>Total Amount</span>
+                    <span class="payment-amount" id="paymentModalTotal">$0.00</span>
+                </div>
+                <div class="payment-methods-grid">
+                    <button class="payment-method-btn mpesa" onclick="selectPaymentMethod('mpesa')">
+                        <div class="payment-method-icon">
+                            <svg viewBox="0 0 48 48" width="48" height="48">
+                                <rect x="4" y="8" width="40" height="32" rx="4" fill="#43B02A"/>
+                                <text x="24" y="28" text-anchor="middle" fill="white" font-size="14" font-weight="bold">M-PESA</text>
+                            </svg>
+                        </div>
+                        <span class="payment-method-name">M-Pesa</span>
+                        <span class="payment-method-desc">Pay with mobile money</span>
+                    </button>
+                    <button class="payment-method-btn card" onclick="selectPaymentMethod('card')">
+                        <div class="payment-method-icon">
+                            <svg viewBox="0 0 48 48" width="48" height="48">
+                                <rect x="4" y="8" width="40" height="32" rx="4" fill="#1A1F71"/>
+                                <text x="24" y="26" text-anchor="middle" fill="white" font-size="10" font-weight="bold">VISA</text>
+                                <rect x="8" y="12" width="8" height="4" fill="#F79E1B" opacity="0.8"/>
+                            </svg>
+                        </div>
+                        <span class="payment-method-name">Credit/Debit Card</span>
+                        <span class="payment-method-desc">Visa, Mastercard</span>
+                    </button>
+                    <button class="payment-method-btn bank" onclick="selectPaymentMethod('bank')">
+                        <div class="payment-method-icon">
+                            <svg viewBox="0 0 48 48" width="48" height="48">
+                                <rect x="4" y="8" width="40" height="32" rx="4" fill="#2E7D32"/>
+                                <path d="M12 20h24M12 28h24" stroke="white" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <span class="payment-method-name">Bank Transfer</span>
+                        <span class="payment-method-desc">Direct bank payment</span>
+                    </button>
+                    <button class="payment-method-btn cash" onclick="selectPaymentMethod('cash')">
+                        <div class="payment-method-icon">
+                            <svg viewBox="0 0 48 48" width="48" height="48">
+                                <rect x="6" y="10" width="36" height="28" rx="2" fill="#1976D2"/>
+                                <circle cx="24" cy="24" r="8" fill="none" stroke="white" stroke-width="2"/>
+                                <text x="24" y="27" text-anchor="middle" fill="white" font-size="10" font-weight="bold">$</text>
+                            </svg>
+                        </div>
+                        <span class="payment-method-name">Cash</span>
+                        <span class="payment-method-desc">Pay with cash</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- M-Pesa Payment Modal -->
+    <div class="modal" id="mpesaPaymentModal">
+        <div class="modal-overlay" onclick="closeModal('mpesaPaymentModal')"></div>
+        <div class="modal-content payment-form-modal">
+            <div class="modal-header">
+                <h3>
+                    <svg viewBox="0 0 48 48" width="24" height="24" style="vertical-align: middle; margin-right: 8px;">
+                        <rect x="4" y="8" width="40" height="32" rx="4" fill="#43B02A"/>
+                        <text x="24" y="28" text-anchor="middle" fill="white" font-size="10" font-weight="bold">M-PESA</text>
+                    </svg>
+                    M-Pesa Payment
+                </h3>
+                <button class="modal-close" onclick="closeModal('mpesaPaymentModal')">&times;</button>
+            </div>
+            <div class="mpesa-payment-info">
+                <div class="paybill-info">
+                    <div class="info-row">
+                        <span class="info-label">Paybill Number</span>
+                        <span class="info-value paybill-number" id="pharmacyPaybill">888123</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Account No.</span>
+                        <span class="info-value account-number" id="mpesaAccountNo">---</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Amount</span>
+                        <span class="info-value amount" id="mpesaAmount">$0.00</span>
+                    </div>
+                </div>
+                <form id="mpesaPaymentForm" onsubmit="processMpesaPayment(event)">
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" id="mpesaPhone" placeholder="07XXXXXXXX" maxlength="10" required>
+                        <span class="input-hint">Enter the phone number registered with M-Pesa</span>
+                    </div>
+                    <button type="submit" class="btn btn-mpesa btn-block" id="mpesaPayBtn">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="4" width="20" height="16" rx="2"/>
+                            <path d="M7 15h.01M7 9h10"/>
+                        </svg>
+                        Send STK Push
+                    </button>
+                </form>
+                <div class="mpesa-instructions">
+                    <p><strong>How to pay:</strong></p>
+                    <ol>
+                        <li>Enter your M-Pesa phone number</li>
+                        <li>Click "Send STK Push"</li>
+                        <li>You will receive a prompt on your phone</li>
+                        <li>Enter your M-Pesa PIN to complete payment</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="mpesa-processing hidden" id="mpesaProcessing">
+                <div class="processing-animation">
+                    <div class="stk-animation">
+                        <svg viewBox="0 0 100 100" width="80" height="80">
+                            <circle cx="50" cy="50" r="40" fill="none" stroke="#43B02A" stroke-width="3" opacity="0.3"/>
+                            <circle cx="50" cy="50" r="40" fill="none" stroke="#43B02A" stroke-width="3" stroke-dasharray="251" stroke-dashoffset="251">
+                                <animate attributeName="stroke-dashoffset" from="251" to="0" dur="1.5s" repeatCount="indefinite"/>
+                            </circle>
+                            <text x="50" y="55" text-anchor="middle" fill="#43B02A" font-size="12" font-weight="bold">M-PESA</text>
+                        </svg>
+                    </div>
+                    <h4 id="mpesaProcessingTitle">Sending STK Push...</h4>
+                    <p id="mpesaProcessingText">Please check your phone</p>
+                    <div class="processing-steps">
+                        <div class="step active" id="stkStep1">
+                            <span class="step-icon">1</span>
+                            <span class="step-text">Sending request</span>
+                        </div>
+                        <div class="step" id="stkStep2">
+                            <span class="step-icon">2</span>
+                            <span class="step-text">Awaiting PIN</span>
+                        </div>
+                        <div class="step" id="stkStep3">
+                            <span class="step-icon">3</span>
+                            <span class="step-text">Confirming</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mpesa-success hidden" id="mpesaSuccess">
+                <div class="success-animation">
+                    <svg viewBox="0 0 100 100" width="80" height="80">
+                        <circle cx="50" cy="50" r="45" fill="#43B02A"/>
+                        <path d="M30 50 L45 65 L70 40" stroke="white" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <animate attributeName="stroke-dasharray" from="100" to="0" dur="0.5s"/>
+                        </path>
+                    </svg>
+                    <h4>Payment Successful!</h4>
+                    <div class="transaction-details">
+                        <div class="detail-row">
+                            <span>Transaction ID:</span>
+                            <span class="detail-value" id="mpesaTransactionId">---</span>
+                        </div>
+                        <div class="detail-row">
+                            <span>Phone:</span>
+                            <span class="detail-value" id="mpesaConfirmPhone">---</span>
+                        </div>
+                        <div class="detail-row">
+                            <span>Amount:</span>
+                            <span class="detail-value" id="mpesaConfirmAmount">---</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" onclick="closeMpesaAndShowReceipt()">View Receipt</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card Payment Modal -->
+    <div class="modal" id="cardPaymentModal">
+        <div class="modal-overlay" onclick="closeModal('cardPaymentModal')"></div>
+        <div class="modal-content payment-form-modal">
+            <div class="modal-header">
+                <h3>
+                    <svg viewBox="0 0 48 48" width="24" height="24" style="vertical-align: middle; margin-right: 8px;">
+                        <rect x="4" y="8" width="40" height="32" rx="4" fill="#1A1F71"/>
+                        <text x="24" y="28" text-anchor="middle" fill="white" font-size="8" font-weight="bold">SECURE</text>
+                    </svg>
+                    Card Payment
+                </h3>
+                <button class="modal-close" onclick="closeModal('cardPaymentModal')">&times;</button>
+            </div>
+            <form id="cardPaymentForm" onsubmit="processCardPayment(event)">
+                <div class="card-payment-info">
+                    <div class="card-amount-display">
+                        <span>Amount to Pay</span>
+                        <span class="card-amount" id="cardPaymentAmount">$0.00</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Card Number</label>
+                        <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                        <div class="card-icons">
+                            <svg viewBox="0 0 48 24" width="40" height="20" style="opacity: 0.5;">
+                                <rect width="48" height="24" rx="4" fill="#1A1F71"/>
+                                <text x="24" y="16" text-anchor="middle" fill="white" font-size="8" font-weight="bold">VISA</text>
+                            </svg>
+                            <svg viewBox="0 0 48 24" width="40" height="20" style="opacity: 0.5;">
+                                <rect width="48" height="24" rx="4" fill="#EB001B" opacity="0.8"/>
+                                <circle cx="19" cy="12" r="8" fill="#EB001B"/>
+                                <circle cx="29" cy="12" r="8" fill="#F79E1B"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Expiry Date</label>
+                            <input type="text" id="cardExpiry" placeholder="MM/YY" maxlength="5" required>
+                        </div>
+                        <div class="form-group">
+                            <label>CVV</label>
+                            <input type="password" id="cardCvv" placeholder="123" maxlength="4" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Cardholder Name</label>
+                        <input type="text" id="cardName" placeholder="John Doe" required>
+                    </div>
+                    <button type="submit" class="btn btn-card btn-block" id="cardPayBtn">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="4" width="20" height="16" rx="2"/>
+                            <path d="M2 10h20"/>
+                        </svg>
+                        Pay $0.00
+                    </button>
+                    <div class="secure-notice">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                        </svg>
+                        <span>Your payment is secured with 256-bit SSL encryption</span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- OTP Verification Modal -->
+    <div class="modal" id="otpModal">
+        <div class="modal-overlay" onclick="closeOtpModal()"></div>
+        <div class="modal-content otp-modal">
+            <div class="otp-header">
+                <svg viewBox="0 0 48 48" width="48" height="48">
+                    <rect x="4" y="8" width="40" height="32" rx="4" fill="#1A1F71"/>
+                    <path d="M24 14v20M14 24h20" stroke="white" stroke-width="2"/>
+                </svg>
+                <h3>Verify Your Payment</h3>
+                <p>Enter the One-Time Password (OTP) sent to your mobile number</p>
+            </div>
+            <div class="otp-info">
+                <p>Code sent to: <strong id="otpSentTo">*** *** *** 1234</strong></p>
+            </div>
+            <form id="otpForm" onsubmit="verifyOtp(event)">
+                <div class="otp-input-container">
+                    <input type="text" id="otpInput" maxlength="4" placeholder="----" required>
+                </div>
+                <p class="otp-hint">Enter 4-digit OTP (use 1234 for testing)</p>
+                <button type="submit" class="btn btn-card btn-block" id="otpVerifyBtn">
+                    Verify & Complete Payment
+                </button>
+            </form>
+            <div class="otp-resend">
+                <p>Didn't receive the code? <button type="button" class="resend-btn" onclick="resendOtp()">Resend OTP</button></p>
+            </div>
+            <div class="otp-processing hidden" id="otpProcessing">
+                <div class="processing-spinner"></div>
+                <p>Verifying your payment...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bank Transfer Modal -->
+    <div class="modal" id="bankTransferModal">
+        <div class="modal-overlay" onclick="closeModal('bankTransferModal')"></div>
+        <div class="modal-content payment-form-modal">
+            <div class="modal-header">
+                <h3>Bank Transfer</h3>
+                <button class="modal-close" onclick="closeModal('bankTransferModal')">&times;</button>
+            </div>
+            <div class="bank-payment-info">
+                <div class="bank-details">
+                    <div class="bank-logo">
+                        <svg viewBox="0 0 48 48" width="48" height="48">
+                            <rect x="4" y="8" width="40" height="32" rx="4" fill="#2E7D32"/>
+                            <path d="M12 18h24M12 24h24M12 30h16" stroke="white" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h4>PharmaCare Chemist</h4>
+                    <p>Bank Account Details</p>
+                </div>
+                <div class="bank-info-table">
+                    <div class="bank-row">
+                        <span class="bank-label">Bank Name</span>
+                        <span class="bank-value">Equity Bank Kenya</span>
+                    </div>
+                    <div class="bank-row">
+                        <span class="bank-label">Account Name</span>
+                        <span class="bank-value">PharmaCare Chemist Ltd</span>
+                    </div>
+                    <div class="bank-row">
+                        <span class="bank-label">Account Number</span>
+                        <span class="bank-value account-no" id="bankAccountNo">---</span>
+                    </div>
+                    <div class="bank-row">
+                        <span class="bank-label">Branch</span>
+                        <span class="bank-value">Embu Branch</span>
+                    </div>
+                    <div class="bank-row highlight">
+                        <span class="bank-label">Amount</span>
+                        <span class="bank-value amount" id="bankAmount">$0.00</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Reference/Transaction ID</label>
+                    <input type="text" id="bankReference" placeholder="Enter your bank transaction reference" required>
+                </div>
+                <button class="btn btn-success btn-block" onclick="confirmBankTransfer()">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                        <polyline points="22 4 12 14.01 9 11.01"/>
+                    </svg>
+                    Confirm Payment
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

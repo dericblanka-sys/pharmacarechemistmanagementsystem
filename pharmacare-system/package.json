@@ -1,0 +1,12 @@
+{
+  "name": "pharmacare-manager",
+  "version": "1.0.0",
+  "description": "PharmaCare Chemist Management System",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve ."
+  },
+  "keywords": ["pharmacy", "management", "healthcare"],
+  "author": "PharmaCare Development Team",
+  "license": "MIT"
+}
